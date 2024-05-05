@@ -32,7 +32,9 @@ class ProductController extends Controller
         return $this->response(true, 200, 'ok', $products);
     }
 
-
+   public function sum($x,$y){
+    return $x+$y;
+   }
 
     /**
      * Store a newly created resource in storage.
