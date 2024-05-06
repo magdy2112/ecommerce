@@ -22,12 +22,12 @@ class CartItemController extends Controller
 
         $id =  Auth()->user()->id;
 
-        $allitem = CartItem::with('products')->where('user_id',$id)->get();
+        $allitem = CartItem::with('products','products.discount')->where('user_id',$id)->get();
         // dd($allitem);
         $totalPrice = 0;
 
         foreach ($allitem as $item) {
-            $totalPrice += $item->products->price * $item->quantity;
+            $totalPrice += $item->products->netprice * $item->quantity;
         }
         return $this->response(true,200,'ok',['cartitem'=>$allitem,'totalPrice' => $totalPrice]);
     }
@@ -56,10 +56,16 @@ class CartItemController extends Controller
      */
     public function show($id,)
     {
-            // dd ($cartItem);
-         $cart= CartItem::find($id);
-         $product = Product::find($cart->product_id);
-         return $this->response(true,200,'ok',$product);
+        $cart= CartItem::find($id);
+        // return $cart;
+        if ($cart) {
+            $product = Product::find($cart->product_id);
+            return $this->response(true,200,'ok',$product);
+        }else{
+            return $this->response(false,406,'Not Acceptable');
+        }
+
+
     }
 
     /**

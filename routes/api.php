@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -25,69 +26,75 @@ Route::middleware('auth:sanctum')
                 Route::get('/{user}', 'show');
             });
 
-            // route product controller
+        // route product controller
 
-           Route::controller(ProductController::class)
-           ->prefix('product')
-           ->group(function () {
-            Route::get('/', 'index'); // all products
-            Route::get('/{id}', 'show'); // single product
-            route::post('store', 'store');   // add a new product to the database (admin)
-            route::delete('/{product}','destroy');// delete single products (admin)
-            route::put('/{product}','update');// update single products (admin)
-            route::patch('/updates','updatemany');// update many products (admin)
-            route::delete('/delete','destroymany'); // delete many products (admin)
-           });
+        Route::controller(ProductController::class)
+            ->prefix('product')
+            ->group(function () {
+                Route::get('/', 'index'); // all products
+                Route::get('/{id}', 'show'); // single product
+                route::post('store', 'store');   // add a new product to the database (admin)
+                route::delete('/{product}', 'destroy'); // delete single products (admin)
+                route::put('/{product}', 'update'); // update single products (admin)
+                route::patch('/updates', 'updatemany'); // update many products (admin)
+                route::delete('/delete', 'destroymany'); // delete many products (admin)
+            });
 
-           //route fav controller
-           route::controller(FavController::class)->prefix('fav')
-           ->group(function(){
-            Route::get('/', 'show');
-            Route::post('/', 'store');
-            Route::delete('/{fav}', 'destroy');
-           });
-           //route cart item controller
-           route::controller(CartItemController::class)->middleware(Notadmin::class)
-           ->prefix('cartitem')
-           ->group(function(){
-            Route::get('/', 'index');
-            Route::get('/{id}', 'show');
-            Route::post('store', 'store');
-            Route::put('/{cartItem}', 'update');
-            Route::delete('/{cartItem}', 'destroy');
-
-           });
-
+        //route fav controller
+        route::controller(FavController::class)->prefix('fav')
+            ->group(function () {
+                Route::get('/', 'show');
+                Route::post('/', 'store');
+                Route::delete('/{fav}', 'destroy');
+            });
+        //route cart item controller
+        route::controller(CartItemController::class)->middleware(Notadmin::class)
+            ->prefix('cartitem')
+            ->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{id}', 'show');
+                Route::post('store', 'store');
+                Route::put('/{cartItem}', 'update');
+                Route::delete('/{cartItem}', 'destroy');
+            });
+        // discount route
+        route::controller(DiscountController::class)
+            ->prefix('discount')
+            ->group(function () {
+                Route::get('/', 'index');
+                Route::get('/{id}', 'show');
+                Route::post('store', 'store');
+                Route::put('/{cartItem}', 'update');
+                Route::delete('/{cartItem}', 'destroy');
+            });
     });
- // register controller
-route::controller(RegisterController::class)->group(function(){
+// register controller
+route::controller(RegisterController::class)->group(function () {
     Route::post('register', 'register');
 });
 
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth','guest')->name('verification.notice');
+})->middleware('auth', 'guest')->name('verification.notice');
 
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-      return response()->json([
+    return response()->json([
         'success' => true,
-        'status' => 'ok' ,
-        'status_msg' => 'Verified' ,
+        'status' => 'ok',
+        'status_msg' => 'Verified',
 
 
     ]);
-})->middleware(['auth', 'signed','guest'])->name('verification.verify');
+})->middleware(['auth', 'signed', 'guest'])->name('verification.verify');
 
-route::controller(LoginController::class)->group(function(){
+route::controller(LoginController::class)->group(function () {
     Route::post('out', 'logout');
 });
 
-route::controller(LoginController::class)->group(function(){
+route::controller(LoginController::class)->group(function () {
     Route::post('login', 'login')->name('login');
 });
-
-

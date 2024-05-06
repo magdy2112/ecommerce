@@ -13,6 +13,7 @@ use App\Notifications\FavUpdate;
 use App\Traits\HttpResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -22,13 +23,26 @@ class ProductController extends Controller
 
     public function index()
     {
-        // shaow all product to user
+        $products = Product::with('discount')->get();
+        // Calculate the net price for each product using the percentage
+        foreach ($products as $product) {
+            $percentage = $product->discount->percent ;
+            $status = $product->discount->status;
+            if ($status == 'active') {
+                $netprice = $product->price - ($product->price * $percentage / 100);
+                $product->netprice = $netprice;
+                $product->save();
+            }else
+            $netprice = $product->price;
+            $product->netprice = $netprice;
+            $product->save();
+               }
+        return $products;
 
 
-        // $products = collect(Product::all());
         $products = Product::orderBy('name')->get();
 
-        // $data =    $products->sortBy('name');
+
         return $this->response(true, 200, 'ok', $products);
     }
 
@@ -95,7 +109,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-            // dd($user);
+        // dd($user);
 
         if (Gate::allows('isuser')) {
             // dd($product);

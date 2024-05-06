@@ -5,23 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Discount;
 use App\Http\Requests\StoreDiscountRequest;
 use App\Http\Requests\UpdateDiscountRequest;
+use App\Traits\HttpResponse;
 
 class DiscountController extends Controller
 {
+    use HttpResponse;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+         $data = Discount::get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return $this->response(true,200,'ok',   $data);
+
     }
 
     /**
@@ -40,13 +37,7 @@ class DiscountController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Discount $discount)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
