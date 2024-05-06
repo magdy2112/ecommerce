@@ -27,7 +27,9 @@ return new class extends Migration
 
 
             $table->float('price');
-            
+            $table->float('netprice')->default(0);
+
+
             // $table->foreignIdFor(Discount::class)->constrained();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

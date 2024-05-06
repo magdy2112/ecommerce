@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDiscountRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateDiscountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,12 @@ class UpdateDiscountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+                'type'=>'unique:discounts',
+                'description'=>'string|unique:discounts',
+                'percent'=>'integer|min:0|max:100',
+               'status'=>[Rule::in(['active','disactive'])],
+
         ];
     }
 }

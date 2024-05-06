@@ -64,8 +64,8 @@ Route::middleware('auth:sanctum')
                 Route::get('/', 'index');
                 Route::get('/{id}', 'show');
                 Route::post('store', 'store');
-                Route::put('/{cartItem}', 'update');
-                Route::delete('/{cartItem}', 'destroy');
+                Route::put('/{id}', 'update');
+                Route::delete('/{id}', 'destroy');
             });
     });
 // register controller

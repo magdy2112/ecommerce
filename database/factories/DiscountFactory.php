@@ -19,9 +19,9 @@ class DiscountFactory extends Factory
     {
         return [
             // 'product_id'=>Product::all()->random()->id,
-            'type' => fake()->unique()->randomElement(['Percentage sales',' Early payment discounts','Free shipping discounts']),
+            'type' => fake()->unique()->sentence(1),
             'description' => fake()->sentence(3),
-            'percent' => fake()->numberBetween(1, 50),
+            'percent' => fake()->numberBetween(0, 50),
             'status' => fake()->randomElement(['active','disactive'])
 
 

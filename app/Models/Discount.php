@@ -14,6 +14,7 @@ class Discount extends Model
         'description',
         'percent',
         'status',
+
     ];
     public function products(){
         return $this->hasMany(product::class,'discount_id' );

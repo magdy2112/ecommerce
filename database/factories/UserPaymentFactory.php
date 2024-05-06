@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use PHPUnit\Framework\Constraint\IsFalse;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserPayment>
@@ -20,12 +21,13 @@ class UserPaymentFactory extends Factory
         return [
 
             'user_id'=>User::all()->random()->id,
-            'payment_type'=>fake()->randomElement(['cash','visa']),
-            'provider'=>fake()->randomElement(['cib','masr','hsbc']),
-            'account_num'=>fake()->creditCardNumber(),
-              'expired'=>fake()->dateTimeThisCentury('+8 years'),
+            'payment_type'=>fake()->creditCardType(),
+            // 'provider'=>fake()->randomElement(['cib','masr','hsbc']),
+            'creditCardNumber'=>fake()->creditCardNumber(),
+              'expirationDate'=>fake()->creditCardExpirationDate(false),
 
 
         ];
     }
 }
+

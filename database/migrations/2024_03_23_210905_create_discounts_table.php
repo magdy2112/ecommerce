@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             // $table->foreignId('product_id')->constrained();
-            $table->enum('type',['Percentage sales',' Early payment discounts','Free shipping discounts']);
+            $table->string('type')->unique();
             $table->text('description');
             $table->integer('percent');
             $table->enum('status',['active','disactive']);

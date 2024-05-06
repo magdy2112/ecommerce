@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
         //    $table->foreignIdFor(User::class)->constrained();
            $table->foreignId('user_id')->constrained();
-           $table->float('total',8,2);
            $table->integer('amount');
-           $table->enum('provider',['cib','masr','hsbc']);
+        //    $table->string('provider');
            $table->enum('status',['success','failed','pending']);
+           $table->float('total',8,2)->nullable();
            $table->timestamp('created_at');
            $table->timestamp('updated_at')->nullable();
            $table->softDeletes()->nullable();

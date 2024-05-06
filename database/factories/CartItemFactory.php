@@ -25,7 +25,7 @@ class CartItemFactory extends Factory
             'product_id'=>Product::all()->random()->id,
             'user_id'=>User::all()->random()->id,
 
-            'quantity'=>fake()->numberBetween(1,1),
+            // 'quantity'=>fake()->numberBetween(1,1),
 
         ];
     }

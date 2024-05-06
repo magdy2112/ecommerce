@@ -22,8 +22,8 @@ class CartItemController extends Controller
 
         $id =  Auth()->user()->id;
 
-        $allitem = CartItem::with('products','products.discount')->where('user_id',$id)->get();
-        // dd($allitem);
+        $allitem = CartItem::with('products')->where('user_id',$id)->get();
+    
         $totalPrice = 0;
 
         foreach ($allitem as $item) {

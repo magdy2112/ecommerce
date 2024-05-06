@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->float('netprice')->after('price');
+            $table->foreignId('Product_Category_id')->nullable()->change->constrained();
+            $table->foreignId('discount_id')->de()->change->constrained();
+            $table->foreignId('product_inventory_id')->nullable()->change->constrained();
         });
-
     }
+
     /**
      * Reverse the migrations.
      */

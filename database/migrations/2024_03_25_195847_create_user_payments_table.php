@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             // $table->foreignIdFor(User::class)->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->enum('payment_type',['cash','visa']);
-            $table->enum('provider',['cib','masr','hsbc']);
-            $table->char('account_num',50);
-            $table->date('expired');
+            $table->string('payment_type');
+            $table->char('creditCardNumber',50);
+            // $table->char('account_num',50);
+            $table->date('expirationDate');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes()->nullable();

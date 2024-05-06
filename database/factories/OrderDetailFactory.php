@@ -29,9 +29,9 @@ class OrderDetailFactory extends Factory
 
 
             'user_id'=>User::all()->random()->id,
-            'total'=>fake()->numberBetween(),
+            // 'total'=>fake()->numberBetween(),
             'amount'=>fake()->numberBetween(10,100),
-            'provider'=>fake()->randomElement(['cib','masr','hsbc']),
+            // 'provider'=>fake()->creditCardType(),
             'status'=>fake()->randomElement(['success','failed','pending']),
 
 
