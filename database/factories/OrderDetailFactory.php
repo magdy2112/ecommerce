@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PaymentDetail;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -29,6 +30,8 @@ class OrderDetailFactory extends Factory
 
 
             'user_id'=>User::all()->random()->id,
+            'product_id'=>Product::all()->random()->id,
+
             // 'total'=>fake()->numberBetween(),
             'amount'=>fake()->numberBetween(10,100),
             // 'provider'=>fake()->creditCardType(),

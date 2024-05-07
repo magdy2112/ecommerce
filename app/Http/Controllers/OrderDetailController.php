@@ -13,7 +13,10 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+
+        $id =auth()->user()->id;
+        $order_detials = OrderDetail::with('user')->where('user_id',$id)->get();
+        return $order_detials;
     }
 
     /**

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(400)->create();
         CartItem::factory(100)->create();
         OrderDetail::factory(100)->create();
-        OrderItem::factory(100)->create();
+        // OrderItem::factory(100)->create();
         UserAddress::factory(100)->create();
         UserPayment::factory(100)->create();
 

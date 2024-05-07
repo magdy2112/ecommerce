@@ -4,6 +4,7 @@ use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Register3Controller;
 use App\Http\Controllers\RegisterController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\Notadmin;
 use App\Http\Middleware\Notuser;
 use App\Models\CartItem;
+use App\Models\OrderDetail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +68,12 @@ Route::middleware('auth:sanctum')
                 Route::post('store', 'store');
                 Route::put('/{id}', 'update');
                 Route::delete('/{id}', 'destroy');
+            });
+            // route order_detail
+            route::controller(OrderDetailController::class)
+           ->prefix('orderdetails')
+           ->group(function(){
+                route::get('/','index');
             });
     });
 // register controller

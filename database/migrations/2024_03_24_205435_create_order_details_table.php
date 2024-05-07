@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
         //    $table->foreignIdFor(User::class)->constrained();
            $table->foreignId('user_id')->constrained();
+           $table->foreignId('product_id')->constrained();
            $table->integer('amount');
         //    $table->string('provider');
            $table->enum('status',['success','failed','pending']);
