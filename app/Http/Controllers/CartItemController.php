@@ -21,15 +21,16 @@ class CartItemController extends Controller
 
 
         $id =  Auth()->user()->id;
+        $user = User::find($id)->first();
 
         $allitem = CartItem::with('products')->where('user_id',$id)->get();
-    
+
         $totalPrice = 0;
 
         foreach ($allitem as $item) {
             $totalPrice += $item->products->netprice * $item->quantity;
         }
-        return $this->response(true,200,'ok',['cartitem'=>$allitem,'totalPrice' => $totalPrice]);
+        return $this->response(true,200,'ok',['cartitem'=>$allitem,'totalPrice' => $totalPrice,'user'=>$user]);
     }
 
     /**
@@ -38,7 +39,8 @@ class CartItemController extends Controller
     public function store(Request $request)
     {
         $data= $request->validate([
-            'product_id'=>'required'
+            'product_id'=>'required',
+
         ]);
         $data['user_id'] = Auth()->user()->id;
         $data['quantity'] = 1;
@@ -74,7 +76,7 @@ class CartItemController extends Controller
     public function update(Request $request,CartItem $cartItem)
     {
                $data= $request->validate([
-                'quantity'=>'numeric|required|min:1'
+                'quantity'=>'numeric|required|min:2'
                ]);
                if ($cartItem->update($data)) {
                return $this->response(true,200,'ok',$cartItem);

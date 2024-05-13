@@ -5,6 +5,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Register3Controller;
 use App\Http\Controllers\RegisterController;
@@ -74,6 +75,17 @@ Route::middleware('auth:sanctum')
            ->prefix('orderdetails')
            ->group(function(){
                 route::get('/','index');
+            });
+            // route product category
+            route::controller(ProductCategoryController::class)
+            ->prefix('category')
+            ->group(function () {
+                Route::get('/', 'index'); // all products
+                Route::get('/products/{id}', 'product_category'); // single product
+                route::post('store', 'store');   // add a new product to the database (admin)
+                route::delete('/{id}', 'destroy'); // delete single products (admin)
+                route::put('/{id}', 'update'); // update single products (admin)
+
             });
     });
 // register controller

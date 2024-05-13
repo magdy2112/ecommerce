@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CartItem;
 use App\Models\PaymentDetail;
 use App\Models\Product;
 use App\Models\User;
@@ -29,15 +30,15 @@ class OrderDetailFactory extends Factory
 
 
 
-            'user_id'=>User::all()->random()->id,
-            'product_id'=>Product::all()->random()->id,
+            'user_id'=>CartItem::all()->random()->id,
+            'cart_item_id'=>CartItem::all()->random()->id,
 
-            // 'total'=>fake()->numberBetween(),
+            // // 'total'=>fake()->numberBetween(),
             'amount'=>fake()->numberBetween(10,100),
-            // 'provider'=>fake()->creditCardType(),
+            // // 'provider'=>fake()->creditCardType(),
             'status'=>fake()->randomElement(['success','failed','pending']),
 
-
+           
 
 
 

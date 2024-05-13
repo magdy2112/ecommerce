@@ -21,7 +21,7 @@ class DiscountFactory extends Factory
             // 'product_id'=>Product::all()->random()->id,
             'type' => fake()->unique()->sentence(1),
             'description' => fake()->sentence(3),
-            'percent' => fake()->numberBetween(0, 50),
+            'percent' => fake()->unique()->numberBetween(0, 50),
             'status' => fake()->randomElement(['active','disactive'])
 
 

@@ -64,3 +64,4 @@ class PaymentDetailsController extends Controller
         //
     }
 }
+https://wiki.hsoub.com/Laravel/billing

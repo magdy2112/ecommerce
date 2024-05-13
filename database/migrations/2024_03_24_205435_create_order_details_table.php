@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-        //    $table->foreignIdFor(User::class)->constrained();
-           $table->foreignId('user_id')->constrained();
-           $table->foreignId('product_id')->constrained();
+
+          $table->foreignId('user_id')->constrained();
+          $table->foreignId('cart_item_id')->constrained();
            $table->integer('amount');
+
+
         //    $table->string('provider');
            $table->enum('status',['success','failed','pending']);
            $table->float('total',8,2)->nullable();

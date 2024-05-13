@@ -22,7 +22,7 @@ class ProductInventoryFactory extends Factory
             // 'product_id'=>Product::all()->id,
             // 'product_id'=>Product::all()->random()->id,
 
-            'quantity'=>fake()->unique()->numberBetween(1,100),
+            'quantity'=>fake()->unique()->numberBetween(500,1000),
         ];
     }
 }

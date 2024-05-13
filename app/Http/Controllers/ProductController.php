@@ -23,24 +23,26 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('discount')->get();
-        // Calculate the net price for each product using the percentage
-        foreach ($products as $product) {
-            $percentage = $product->discount->percent ;
-            $status = $product->discount->status;
-            if ($status == 'active') {
-                $netprice = $product->price - ($product->price * $percentage / 100);
-                $product->netprice = $netprice;
-                $product->save();
-            }else
-            $netprice = $product->price;
-            $product->netprice = $netprice;
-            $product->save();
-               }
-        return $products;
+        // $products = Product::with('discount')->get();
+        // // Calculate the net price for each product using the percentage
+        // foreach ($products as $product) {
+        //     $percentage = $product->discount->percent ;
+        //     $status = $product->discount->status;
+        //     if ($status == 'active') {
+        //         $netprice = $product->price - ($product->price * $percentage / 100);
+        //         $product->netprice = $netprice;
+        //         $product->save();
+        //     }else
+        //     $netprice = $product->price;
+        //     $product->netprice = $netprice;
+        //     $product->save();
+        //        }
+        // return $products;
+
+        // return 'ok';
 
 
-        $products = Product::orderBy('name')->get();
+        $products = Product::orderBy('id')->get();
 
 
         return $this->response(true, 200, 'ok', $products);

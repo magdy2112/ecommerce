@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,4 +37,30 @@ class Product extends Model
     public function orderdetails(){
         return $this->hasMany(OrderDetail::class,'product_id');
     }
-}
+
+//  public function getNetpriceAttribute()
+//  {
+//     if($this->discount->status == 'active'){
+//         return $this->price - ($this->price * $this->discount->percent / 100);
+//     }else{
+//             return $this->price;
+
+//         }
+protected function Netprice(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->discount->status =='active'?$this->price - ($this->price * $this->discount->percent / 100):$this->price,
+        );
+    }
+
+ }
+
+
+
+
+
+
+
+
+
+
